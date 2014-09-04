@@ -1,0 +1,26 @@
+var acme = {};
+acme.getControl = function(ticketbot)
+{
+  var ocr = cognos.Report.getReport("_THIS_");
+  return ocr.prompt.getControlByName(ticketbot);
+};
+alert(acme.getControl('FilterType')._id_);
+<script>
+var acme = {};
+acme.getControl = function(ticketbot)
+{
+  var ocr = cognos.Report.getReport("_THIS_");
+  return ocr.prompt.getControlByName(ticketbot);
+};
+ 
+Date.prototype.getMonthName = function() {
+  var monthNames = [ 'January','February','March','April','May','June','July','August','September','October','November','December'];
+  return monthNames[this.getMonth()];
+}
+ 
+var dt = new Date(),
+    dtCaption = 'Until ' + dt.getMonthName() + ' ' + dt.getDate();
+ 
+document.getElementById('PRMT_' + acme.getControl('FilterType')._id_).getElementsByTagName('OPTION')[1].dv = dtCaption;
+document.getElementById('PRMT_' + acme.getControl('FilterType')._id_).getElementsByTagName('OPTION')[1].innerHTML = dtCaption;
+</script>
