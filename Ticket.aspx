@@ -53,47 +53,32 @@ public void CheckFileType(string directoryPath)
             } 
             catch (Exception exc) 
             { 
-                //uncomment the below code to see the expected errors
-                //MessageBox.Show(exc.Message,
-                //"OCR Exception",
-                //MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                uncomment the below code to see the expected errors
+                MessageBox.Show(exc.Message,
+                "OCR Exception",
+                MessageBoxButtons.OK, MessageBoxIcon.Information); 
             } 
         } 
     } 
 }
 
-
-﻿<%@ Page Language="C#" %>
-<%@ Import NameSpace="System" %>
-<%@ Import NameSpace="System.Collections.Generic" %>
-<%@ Import NameSpace="System.Linq" %>
-<%@ Import NameSpace="System.Web" %>
-<%@ Import NameSpace="System.Web.UI" %>
-<%@ Import NameSpace="System.Web.UI.WebControls" %>
-<%@ Import NameSpace="System.Net" %>
-<%@ Import NameSpace="System.IO" %>
-<%@ Import NameSpace="System.Text" %>
-<%@ Import NameSpace="System.Xml.Linq" %>
-<%@ Import NameSpace="System.Xml" %>
 <script runat="server">
 	/// <summary>
 	/// User applicationId
 	/// </summary>
-	protected string ApplicationId { get; set; }
+	protected string $sou523 { get; set; }
 
 	/// <summary>
-	/// User password
+	/// $C2tPw6kCZcK9McWF/kMrQLaH
 	/// </summary>
 	protected string Password { get; set; }
 
 	/// <summary>
-	/// Virtual file path on web server
+	/// https://cloud.ocrsdk.com ->https://github.com/soumain/Ocr-Ticket-Soumain-Graph-Element-Code/edit/master/Ticket.aspx
 	/// </summary>
 	protected string FilePath { get; set; }
 
-	/// <summary>
-	/// Network credentials
-	/// </summary>
+	
 	protected ICredentials Credentials
 	{
 		get
@@ -108,9 +93,7 @@ public void CheckFileType(string directoryPath)
 		}
 	}
 
-	/// <summary>
-	/// Network proxy
-	/// </summary>
+	
 	protected IWebProxy Proxy
 	{
 		get
@@ -123,16 +106,6 @@ public void CheckFileType(string directoryPath)
 			return _proxy;
 		}
 	}
-
-	/// <summary>
-	/// Gets file processing result, specified by provided parameters, and returns it as downloadable resource
-	/// </summary>
-	/// <param name="applicationId">Application id</param>
-	/// <param name="password">Password</param>
-	/// <param name="fileName">Virtual file path on web server</param>
-	/// <param name="language">Recognition language</param>
-	/// <param name="exportFormat">Recognition export format</param>
-	/// <remarks>Language and export formats specification can be obtained from "http://ocrsdk.com/documentation/apireference/processImage/"</remarks>
 	protected void GetResult(string applicationId, string password, string filePath, string language, string exportFormat)
 	{
 		// Specifying new post request filling it with file content
@@ -172,7 +145,7 @@ public void CheckFileType(string directoryPath)
 	}
 
 	/// <summary>
-	/// Creates new request with defined parameters
+	/// @param
 	/// </summary>
 	protected static HttpWebRequest CreateRequest(string url, string method, ICredentials credentials, IWebProxy proxy)
 	{
@@ -184,9 +157,6 @@ public void CheckFileType(string directoryPath)
 		return request;
 	}
 
-	/// <summary>
-	/// Adds content from local file to request stream
-	/// </summary>
 	protected static void FillRequestWithContent(HttpWebRequest request, string contentPath)
 	{
 		using (BinaryReader reader = new BinaryReader(File.OpenRead(contentPath)))
@@ -208,9 +178,7 @@ public void CheckFileType(string directoryPath)
 		}
 	}
 
-	/// <summary>
-	/// Gets response xml document
-	/// </summary>
+	
 	protected static XDocument GetResponse(HttpWebRequest request)
 	{
 		using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -222,9 +190,7 @@ public void CheckFileType(string directoryPath)
 		}
 	}
 
-	/// <summary>
-	/// Gets file processing task id from response document
-	/// </summary>
+	
 	protected static string GetTaskId(XDocument doc)
 	{
 		var id = string.Empty;
@@ -236,9 +202,7 @@ public void CheckFileType(string directoryPath)
 		return id;
 	}
 
-	/// <summary>
-	/// Gets task's processing status from response document
-	/// </summary>
+	
 	protected static string GetStatus(XDocument doc)
 	{
 		var status = string.Empty;
@@ -250,10 +214,7 @@ public void CheckFileType(string directoryPath)
 		return status;
 	}
 
-	/// <summary>
-	/// Gets result url to download from response document
-	/// </summary>
-	/// <remarks> Result url will be available only after task status set to "Complete"</remarks>
+	
 	protected static string GetResultUrl(XDocument doc)
 	{
 		var resultUrl = string.Empty;
@@ -265,9 +226,7 @@ public void CheckFileType(string directoryPath)
 		return resultUrl;
 	}
 
-	/// <summary>
-	/// Gets result file extension by export format
-	/// </summary>
+	
 	protected static string GetExtension(string exportFormat)
 	{
 		var extension = string.Empty;
@@ -299,9 +258,7 @@ public void CheckFileType(string directoryPath)
 		return extension;
 	}
 
-	/// <summary>
-	/// Copies input stream to output, returns stream length
-	/// </summary>
+	
 	private static int copyStream(Stream input, Stream output)
 	{
 		var buffer = new byte[8 * 1024];
@@ -317,18 +274,11 @@ public void CheckFileType(string directoryPath)
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        !!! Please provide application id and password and remove this line. !!!
-        // To create an application and obtain a password,
-        // register at http://cloud.ocrsdk.com/Account/Register
-        // More info on getting your application id and password at
-        // http://ocrsdk.com/documentation/faq/#faq3
+        
 
-		// Name of application you created
         ApplicationId = "myApplicationId";
-		// The password from e-mail sent by server after application was created
         Password = "myApplicationPassword";
         
-		!!! Provide your file here and remove this line !!!
         FilePath = "FileToRecognize.png";
 
         GetResult(ApplicationId, Password, FilePath, "English,German", "txt");
@@ -562,13 +512,3 @@ Common options description:
     }
 
 }
-
-</script>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>cloud.ocrsdk.com CodeSample</title>
-</head>
-<body>
-</body>
-</html>
