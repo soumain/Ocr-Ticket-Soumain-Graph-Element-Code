@@ -1,3 +1,4 @@
+<script>
 var acme = {};
 acme.getControl = function(ticketbot)
 {
@@ -5,6 +6,8 @@ acme.getControl = function(ticketbot)
   return ocr.prompt.getControlByName(ticketbot);
 };
 alert(acme.getControl('FilterType')._id_);
+</script>
+
 <script>
 var acme = {};
 acme.getControl = function(ticketbot)
